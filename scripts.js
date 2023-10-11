@@ -65,8 +65,12 @@ if (holidays[futureId]) {
 
 // console.log(holidays[futureId].name || `ID ${futureId} not created yet`); This does not work because it is not checking if it even exists, you are just asking for the value of it. I could have turned this into a ternary but is that "clever" code?
 
-copied = holidays.christmas;
-copied = { name: "X-mas Day" };
+/*  1. Fixed the pathway from holidays.christmas to holidays[6]
+    2. "copied" becomes a symbol?
+    3. looked for the name key and changed it to "X-mas Day"
+*/
+copied = holidays[6];
+copied.name = "X-mas Day";
 
 correctDate = copied.date;
 correctDate.hours = 0;
