@@ -72,9 +72,14 @@ if (holidays[futureId]) {
 copied = holidays[6];
 copied.name = "X-mas Day";
 
+/*  1. correctDate is a symbol?
+    2. Remove the time in copied.date otherwise I cannot change the time with sethours/setminutes
+    3. use sethours/setminutes to change the time
+*/
 correctDate = copied.date;
-correctDate.hours = 0;
-correctDate.minutes = 0;
+correctDate = new Date(`25 December ${currentYear}`);
+correctDate.setHours = 0;
+correctDate.setMinutes = 0;
 
 isEarlier = copied.date < holidays[6].date;
 
@@ -125,3 +130,5 @@ console.log("{lastDay}/{lastMonth}/{currentYear}");
 
 const randomHoliday = holidays[Math.random];
 console.log(randomHoliday.date);
+
+// When to use [] or . notation?
