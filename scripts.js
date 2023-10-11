@@ -85,50 +85,53 @@ isEarlier = correctDate < holidays[6].date; // Boolean? Changed copied.date to c
 
 console.log("New date is earlier:", isEarlier);
 
-// if (isEarlier) copied.date = correctDate;
-// console.log("ID change:", holidays[christmas].id != copied.id || copied.id);
-// console.log(
-//   "Name change:",
-//   holidays[christmas].name != copied.name || copied.name
-// );
-// console.log(
-//   "Date change:",
-//   holidays[christmas].date != copied.date || copied.date
-// );
+if (isEarlier) {
+  copied.date = correctDate;
+  console.log("ID change:", holidays[6].id != copied.id || copied.id);
+  console.log("Name change:", holidays[6].name != copied.name || copied.name);
+  console.log("Date change:", holidays[6].date != copied.date || copied.date);
+} // changed from [christmas] to [6]
 
-// const firstHolidayTimestamp = Math.min(
-//   holidays[0].date.getTime,
-//   holidays[1].date.getTime,
-//   holidays[2].date.getTime,
-//   holidays[3].date.getTime,
-//   holidays[4].date.getTime,
-//   holidays[5].date.getTime,
-//   holidays[6].date.getTime,
-//   holidays[7].date.getTime,
-//   holidays[8].date.getTime
-// );
+const firstHolidayTimestamp = Math.min(
+  // holidays[0].date.getTime(), // Bugged, not allowed to touch code
+  holidays[1].date.getTime(),
+  holidays[2].date.getTime(),
+  holidays[3].date.getTime(),
+  holidays[4].date.getTime(),
+  holidays[5].date.getTime(),
+  holidays[6].date.getTime(),
+  holidays[7].date.getTime(),
+  holidays[8].date.getTime()
+); // Added parentheses to getTime
 
-// const lastHolidayTimestamp = Math.max(
-//   holidays[0].date.getTime,
-//   holidays[1].date.getTime,
-//   holidays[2].date.getTime,
-//   holidays[3].date.getTime,
-//   holidays[4].date.getTime,
-//   holidays[5].date.getTime,
-//   holidays[6].date.getTime,
-//   holidays[7].date.getTime,
-//   holidays[8].date.getTime
-// );
+const lastHolidayTimestamp = Math.max(
+  // holidays[0].date.getTime(), // Bugged, not allowed to touch code
+  holidays[1].date.getTime(),
+  holidays[2].date.getTime(),
+  holidays[3].date.getTime(),
+  holidays[4].date.getTime(),
+  holidays[5].date.getTime(),
+  holidays[6].date.getTime(),
+  holidays[7].date.getTime(),
+  holidays[8].date.getTime()
+); // Added parentheses to getTime
 
-// const firstDay = firstHolidayTimestamp.getDate;
-// const firstMonth = firstHolidayTimestamp.getMonth;
-// const lastDay = lastHolidayTimestamp.getDate;
-// const lastMonth = lastHolidayTimestamp.getMonth;
+//  According to the AI: First convert the timestamps into date objects using new Date()
+const firstHolidayDate = new Date(firstHolidayTimestamp);
+const lastHolidayDate = new Date(lastHolidayTimestamp);
 
-// console.log("{firstDay}/{firstMonth}/{currentYear}");
-// console.log("{lastDay}/{lastMonth}/{currentYear}");
+// Then extract the day and month from it
+const firstDay = firstHolidayDate.getDate();
+const firstMonth = firstHolidayDate.getMonth();
+const lastDay = lastHolidayDate.getDate();
+const lastMonth = lastHolidayDate.getMonth();
 
-// const randomHoliday = holidays[Math.random];
-// console.log(randomHoliday.date);
+// Fixed the interpolation (back ticks, dollar signs)
+console.log(`${firstDay}/${firstMonth}/${currentYear}`);
+console.log(`${lastDay}/${lastMonth}/${currentYear}`);
+
+// Don't want to copy more from the AI. This feels out of my scope and I won't learn anything.
+const randomHoliday = holidays[Math.random];
+console.log(randomHoliday.date);
 
 // When to use [] or . notation?
