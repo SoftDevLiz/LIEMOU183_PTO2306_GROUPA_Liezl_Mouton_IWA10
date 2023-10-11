@@ -53,7 +53,17 @@ const futureId = 9;
 
 // Do not change code above this comment
 
-console.log(holidays.futureId.name || "ID {futureId} not created yet");
+/*  1. Turned it into an if statement
+    2. If there is a key with the ID value 9, then log the name key of that ID
+    3. If there isn't, then alert the user
+*/
+if (holidays[futureId]) {
+  console.log(holidays[futureId].name);
+} else {
+  console.log(`ID ${futureId} not created yet`);
+}
+
+// console.log(holidays[futureId].name || `ID ${futureId} not created yet`); This does not work because it is not checking if it even exists, you are just asking for the value of it. I could have turned this into a ternary but is that "clever" code?
 
 copied = holidays.christmas;
 copied = { name: "X-mas Day" };
