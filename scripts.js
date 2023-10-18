@@ -63,7 +63,7 @@ if (holidays[futureId]) {
   console.log(`ID ${futureId} not created yet`);
 }
 
-// console.log(holidays[futureId].name || `ID ${futureId} not created yet`); This does not work because it is not checking if it even exists, you are just asking for the value of it. I could have turned this into a ternary but is that "clever" code?
+// console.log(holidays[futureId].name || `ID ${futureId} not created yet`); This does not work because it is not checking if it even exists, you are just asking for the value of it. I could have turned this into a ternary but is that "clever" code? Answer: It doesn't quite matter. Focus on readability.
 
 /*  1. Fixed the pathway from holidays.christmas to holidays[6]
     2. "copied" becomes a symbol?
@@ -87,51 +87,72 @@ console.log("New date is earlier:", isEarlier);
 
 if (isEarlier) {
   copied.date = correctDate;
-  console.log("ID change:", holidays[6].id != copied.id || copied.id);
-  console.log("Name change:", holidays[6].name != copied.name || copied.name);
-  console.log("Date change:", holidays[6].date != copied.date || copied.date);
+  console.log("ID change:", holidays[6].id != copied.id ? copied.id : "false"); // Fixed this so that it logs false if nothing has been changed
+  console.log(
+    "Name change:",
+    holidays[6].name != copied.name ? "false" : copied.name
+  );
+  console.log(
+    "Date change:",
+    holidays[6].date != copied.date
+      ? "false"
+      : copied.date.toLocaleDateString("en-GB") // Fixed the format of the date with a new method .toLocaleDateString("en-GB") that puts it in UK format
+  );
 } // changed from [christmas] to [6]
 
 const firstHolidayTimestamp = Math.min(
-  // holidays[0].date.getTime(), // Bugged, not allowed to touch code
-  holidays[1].date.getTime(),
-  holidays[2].date.getTime(),
-  holidays[3].date.getTime(),
-  holidays[4].date.getTime(),
-  holidays[5].date.getTime(),
-  holidays[6].date.getTime(),
-  holidays[7].date.getTime(),
-  holidays[8].date.getTime()
+  new Date(holidays[0].date).getTime(),
+  new Date(holidays[1].date).getTime(),
+  new Date(holidays[2].date).getTime(),
+  new Date(holidays[3].date).getTime(),
+  new Date(holidays[4].date).getTime(),
+  new Date(holidays[5].date).getTime(),
+  new Date(holidays[6].date).getTime(),
+  new Date(holidays[7].date).getTime(),
+  new Date(holidays[8].date).getTime()
 ); // Added parentheses to getTime
 
 const lastHolidayTimestamp = Math.max(
-  // holidays[0].date.getTime(), // Bugged, not allowed to touch code
-  holidays[1].date.getTime(),
-  holidays[2].date.getTime(),
-  holidays[3].date.getTime(),
-  holidays[4].date.getTime(),
-  holidays[5].date.getTime(),
-  holidays[6].date.getTime(),
-  holidays[7].date.getTime(),
-  holidays[8].date.getTime()
+  new Date(holidays[0].date).getTime(),
+  new Date(holidays[1].date).getTime(),
+  new Date(holidays[2].date).getTime(),
+  new Date(holidays[3].date).getTime(), // Fixed by adding new Date in front
+  new Date(holidays[4].date).getTime(),
+  new Date(holidays[5].date).getTime(),
+  new Date(holidays[6].date).getTime(),
+  new Date(holidays[7].date).getTime(),
+  new Date(holidays[8].date).getTime()
 ); // Added parentheses to getTime
 
 //  According to the AI: First convert the timestamps into date objects using new Date()
 const firstHolidayDate = new Date(firstHolidayTimestamp);
 const lastHolidayDate = new Date(lastHolidayTimestamp);
 
+/* This is the long way, how it was given to us in the LMS:
+
 // Then extract the day and month from it
+
 const firstDay = firstHolidayDate.getDate();
 const firstMonth = firstHolidayDate.getMonth();
 const lastDay = lastHolidayDate.getDate();
 const lastMonth = lastHolidayDate.getMonth();
 
 // Fixed the interpolation (back ticks, dollar signs)
+
 console.log(`${firstDay}/${firstMonth}/${currentYear}`);
 console.log(`${lastDay}/${lastMonth}/${currentYear}`);
 
-// Don't want to copy more from the AI. This feels out of my scope and I won't learn anything.
-const randomHoliday = holidays[Math.random];
-console.log(randomHoliday.date);
+*/
 
-// When to use [] or . notation?
+// This is the shorter/new way from the .toLocaleDateString method that I found:
+
+console.log(firstHolidayDate.toLocaleDateString("en-GB"));
+console.log(lastHolidayDate.toLocaleDateString("en-GB"));
+
+const totalHolidays = Object.keys(holidays).length; // Get the length of the holiday object (keys)
+const randomObjectIndex = Math.floor(Math.random() * totalHolidays); // Pick a random ID from holiday object (rounded down with math.floor) Why round down? What happens if you round up?
+const randomHoliday = holidays[randomObjectIndex];
+
+console.log(randomHoliday.date.toLocaleDateString("en-GB"));
+
+// When to use [] or . notation? Dot notation is commonly used when you know the exact name of the property you want to access. It is simpler and more concise. On the other hand, square bracket notation is useful when you want to access a property dynamically or when the property name contains special characters or spaces. It allows you to use a variable or an expression inside the brackets to determine the property to access.
